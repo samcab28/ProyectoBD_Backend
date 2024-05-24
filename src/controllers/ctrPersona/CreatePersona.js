@@ -1,4 +1,3 @@
-
 import {getConnection} from "../../database/connection.js";
 
 // En tu controlador de Express

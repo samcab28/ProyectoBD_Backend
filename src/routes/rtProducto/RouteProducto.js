@@ -1,37 +1,24 @@
 import { Router } from 'express';
+import {getProductos, getProductoById} from "../../controllers/ctrProducto/ConsultProducto.js";
+import {createProducto} from "../../controllers/ctrProducto/CreateProducto.js";
+import {deleteProducto} from "../../controllers/ctrProducto/DeleteProducto.js";
+import {updateProducto} from "../../controllers/ctrProducto/ModProducto.js";
 
-// Crear una nueva instancia de Router
 const router = Router();
 
 // Ruta para obtener todos los productos
-router.get('/producto', (req, res) => {
-    // Enviar una respuesta con un mensaje de obtención de productos
-    res.send("obteniendo productos");
-});
+router.get('/producto', getProductos);
 
 // Ruta para obtener un solo producto por ID
-router.get('/producto/:id', (req, res) => {
-    // Enviar una respuesta con un mensaje de obtención de un solo producto
-    res.send("obteniendo un solo producto");
-});
+router.get('/producto/:id', getProductoById);
 
 // Ruta para crear un nuevo producto
-router.post('/producto', (req, res) => {
-    // Enviar una respuesta con un mensaje de creación de producto
-    res.send("creando producto");
-});
+router.post('/producto', createProducto);
 
 // Ruta para modificar un producto existente por ID
-router.put('/producto/:id', (req, res) => {
-    // Enviar una respuesta con un mensaje de modificación de producto
-    res.send("modificando producto");
-});
+router.put('/producto/:id', updateProducto);
 
 // Ruta para borrar un producto existente por ID
-router.delete('/producto/:id', (req, res) => {
-    // Enviar una respuesta con un mensaje de eliminación de producto
-    res.send("borrando producto");
-});
+router.delete('/producto/:id', deleteProducto);
 
-// Exportar el router para que pueda ser utilizado en otros archivos
 export default router;

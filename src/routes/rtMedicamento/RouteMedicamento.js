@@ -1,37 +1,24 @@
 import { Router } from 'express';
+import {getMedicamentos, getMedicamentoById} from "../../controllers/ctrMedicamento/ConsultMedicamento.js";
+import {createMedicamento} from "../../controllers/ctrMedicamento/CreateMedicamento.js";
+import {updateMedicamento} from "../../controllers/ctrMedicamento/ModMedicamento.js";
+import {deleteMedicamento} from "../../controllers/ctrMedicamento/DeleteMedicamento.js";
 
-// Crear una nueva instancia de Router
 const router = Router();
 
 // Ruta para obtener todos los medicamentos
-router.get('/medicamento', (req, res) => {
-    // Enviar una respuesta con un mensaje de obtención de medicamentos
-    res.send("obteniendo medicamentos");
-});
+router.get('/medicamento', getMedicamentos);
 
 // Ruta para obtener un solo medicamento por ID
-router.get('/medicamento/:id', (req, res) => {
-    // Enviar una respuesta con un mensaje de obtención de un solo medicamento
-    res.send("obteniendo un solo medicamento");
-});
+router.get('/medicamento/:id', getMedicamentoById);
 
 // Ruta para crear un nuevo medicamento
-router.post('/medicamento', (req, res) => {
-    // Enviar una respuesta con un mensaje de creación de medicamento
-    res.send("creando medicamento");
-});
+router.post('/medicamento', createMedicamento);
 
 // Ruta para modificar un medicamento existente por ID
-router.put('/medicamento/:id', (req, res) => {
-    // Enviar una respuesta con un mensaje de modificación de medicamento
-    res.send("modificando medicamento");
-});
+router.put('/medicamento/:id', updateMedicamento);
 
 // Ruta para borrar un medicamento existente por ID
-router.delete('/medicamento/:id', (req, res) => {
-    // Enviar una respuesta con un mensaje de eliminación de medicamento
-    res.send("borrando medicamento");
-});
+router.delete('/medicamento/:id', deleteMedicamento);
 
-// Exportar el router para que pueda ser utilizado en otros archivos
 export default router;

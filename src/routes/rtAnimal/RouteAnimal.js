@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {getAnimal, getAnimalById} from "../../controllers/ctrAnimal/ConsultAnimal.js";
 import {createAnimal} from "../../controllers/ctrAnimal/CreateAnimal.js";
 import {deleteAnimal} from "../../controllers/ctrAnimal/DeleteAnimal.js";
+import { updateAnimal } from '../../controllers/ctrAnimal/ModAnimal.js';
 
 
 const router = Router();
@@ -16,7 +17,7 @@ router.get('/animal/:id', getAnimalById);
 router.post('/animal', createAnimal);
 
 // Ruta para modificar un animal existente por ID
-//router.put('/animal/:id', updateAnimal);
+router.put('/animal/:id', updateAnimal);
 
 // Ruta para borrar un animal existente por ID
 router.delete('/animal/:id', deleteAnimal);

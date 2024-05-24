@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {getMarcaProducto, getMarcaProductoById} from "../../controllers/ctrMarcaProducto/ConsultMarcaProducto.js";
 import {deleteMarcaProducto} from "../../controllers/ctrMarcaProducto/DeleteMarcaProducto.js";
 import {createMarcaProducto} from "../../controllers/ctrMarcaProducto/CreateMarcaProducto.js";
+import { updateMarcaProducto } from '../../controllers/ctrMarcaProducto/ModMarcaProducto.js';
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.get('/marcaProducto/:id', getMarcaProductoById);
 router.post('/marcaProducto', createMarcaProducto);
 
 // Ruta para modificar una marca de producto existente por ID
-//router.put('/marcaProducto/:id', updateMarcaProducto);
+router.put('/marcaProducto/:id', updateMarcaProducto);
 
 // Ruta para borrar una marca de producto existente por ID
 router.delete('/marcaProducto/:id', deleteMarcaProducto);

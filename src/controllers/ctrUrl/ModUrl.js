@@ -1,20 +1,25 @@
-import {getConnection} from "../../database/connection.js";
+import { getConnection } from "../../database/connection.js";
+import sql from 'mssql';
 
-// Controlador para modificar una URL por ID
+// Controlador para modificar una DirrecionURL existente por ID
 export const updateUrl = async (req, res) => {
     try {
-        const { id } = req.params; // Obtener el ID de los parámetros de la URL
-        const { Url, DescripcionUrl } = req.body; // Obtener los datos del cuerpo de la petición
+        const { id } = req.params;
+        const { campoModificar, valorNuevo } = req.body;
+
+        console.log("Datos recibidos:", campoModificar, valorNuevo); // Verificar los datos recibidos
+
         const pool = await getConnection();
+
         const result = await pool.request()
-            .input('id', id)
-            .input('Url', Url)
-            .input('DescripcionUrl', DescripcionUrl)
-            .query('exec UrlModificar @id, @Url, @DescripcionUrl'); // Utilizar una consulta parametrizada
-        // Enviar una respuesta con el resultado de la consulta
-        res.send(result);
+            .input('IdDireccionUrl', sql.Int, id)
+            .input('CampoModificar', sql.NVarChar, campoModificar)
+            .input('ValorNuevo', sql.NVarChar, valorNuevo)
+            .query('EXEC DirrecionURLModificar @IdDireccionUrl, @CampoModificar, @ValorNuevo');
+        
+        res.status(200).json({ message: 'DireccionUrl modificada exitosamente', data: result.recordset });
     } catch (error) {
-        console.error("Error al modificar una URL:", error);
-        res.status(500).send("Error al modificar una URL");
+        console.error("Error al modificar direccionurl:", error);
+        res.status(500).send("Error al modificar direccionurl");
     }
-}
+};

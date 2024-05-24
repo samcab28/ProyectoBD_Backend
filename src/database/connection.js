@@ -3,13 +3,14 @@ import sql from 'mssql';
 const dbSettings = {
     user: "Admin",
     password: "luis",
-    server: "localhost",
+    server: "25.7.30.30",   // Cambiar ip real al momento con samir
     database: "Proyecto2Bd_2024",
     options:{
         encrypt: false,
         trustServerCertificate: true,
     }
 }
+
 
 export const getConnection = async() => {
     try{

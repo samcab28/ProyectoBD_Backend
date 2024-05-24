@@ -8,6 +8,7 @@ import RouteProducto from "./routes/rtProducto/RouteProducto.js";
 import RouteSucursal from "./routes/rtSucursal/RouteSucursal.js";
 import RouteUrl from "./routes/rtUrl/RouteUrl.js";
 import RouteAnimal from "./routes/rtAnimal/RouteAnimal.js";
+import RouteMarcaProducto from "./routes/rtMarcaProducto/RouteMarcaProducto.js";
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use(RouteProducto);
 app.use(RouteSucursal)
 app.use(RouteUrl);
 app.use(RouteAnimal);
+app.use(RouteMarcaProducto);
 
 export default app;

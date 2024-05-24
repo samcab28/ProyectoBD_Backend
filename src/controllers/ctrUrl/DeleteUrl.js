@@ -7,7 +7,7 @@ export const deleteUrl = async (req, res) => {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('exec UrlEliminar @id'); // Utilizar una consulta parametrizada
+            .query('exec DirrecionURLEliminar @id'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.send(result);
     } catch (error) {

@@ -4,9 +4,9 @@ import {getConnection} from "../../database/connection.js";
 export const getUrl = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query('exec UrlConsulta');
+        const result = await pool.request().query('exec DirrecionURLConsulta');
         // Enviar una respuesta con el resultado de la consulta
-        res.send(result);
+        res.send(result.recordset);
     } catch (error) {
         console.error("Error al obtener urls:", error);
         res.status(500).send("Error al obtener urls");
@@ -20,7 +20,7 @@ export const getUrlById = async (req, res) => {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('exec UrlConsulta @id'); // Utilizar una consulta parametrizada
+            .query('exec DirrecionURLConsulta @id'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.send(result.recordset);
     } catch (error) {

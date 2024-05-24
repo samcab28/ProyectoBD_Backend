@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {getMascota, getMascotaById} from "../../controllers/ctrMascota/ConsultMascota.js";
 import {createMascota} from "../../controllers/ctrMascota/CreateMascota.js";
-import {deleteMascota} from "../../controllers/ctrMascota/DelteMascota.js";
+import {deleteMascota} from "../../controllers/ctrMascota/DeleteMascota.js";
 import {updateMascota} from "../../controllers/ctrMascota/ModMascota.js";
 
 // Crear una nueva instancia de Router

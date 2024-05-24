@@ -6,7 +6,7 @@ export const getPersona = async (req, res) => {
         const pool = await getConnection();
         const result = await pool.request().query('exec PersonaConsulta');
         // Enviar una respuesta con el resultado de la consulta
-        res.send(result);
+        res.send(result.recordset);
     } catch (error) {
         console.error("Error al obtener personas:", error);
         res.status(500).send("Error al obtener personas");

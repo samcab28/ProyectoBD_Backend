@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getPersona, getPersonaById } from '../../controllers/ctrPersona/ConsultaPersona.js';
 import { deletePersona} from "../../controllers/ctrPersona/DeletePersona.js";
-import {createPersona} from "../../controllers/ctrPersona/CreatePersona.js";
+import {createPersona} from "../../controllers/ctrPersona/CreatePersona.js"
 import {updatePersona} from "../../controllers/ctrPersona/ModPersona.js";
 
 // Crear una nueva instancia de Router

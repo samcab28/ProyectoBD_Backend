@@ -9,6 +9,9 @@ import RouteSucursal from "./routes/rtSucursal/RouteSucursal.js";
 
 const app = express();
 
+//declaracion de uso de json en el proyecto
+app.use(express.json());
+
 //declaracion de uso de los routers
 app.use(RouteMascota);
 app.use(RouteMedicamento);

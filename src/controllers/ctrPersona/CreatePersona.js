@@ -1,12 +1,24 @@
+
 import {getConnection} from "../../database/connection.js";
 
-// Controlador para crear una nueva persona
-export const createPersona = (req, res) => {
-    try{
-
+// En tu controlador de Express
+export const createPersona = async (req, res) => {
+    try {
+        const { TipoPersona, Sexo, NombrePersona, ApellidoPersona, TelefonoPersona, CorreoPersona, UsuarioPersona, PasswordPersona } = req.body;
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('TipoPersona', TipoPersona)
+            .input('Sexo', Sexo)
+            .input('NombrePersona', NombrePersona)
+            .input('ApellidoPersona', ApellidoPersona)
+            .input('TelefonoPersona', TelefonoPersona)
+            .input('CorreoPersona', CorreoPersona)
+            .input('UsuarioPersona', UsuarioPersona)
+            .input('PasswordPersona', PasswordPersona)
+            .query('exec PersonaCrear @TipoPersona, @Sexo, @NombrePersona, @ApellidoPersona, @TelefonoPersona, @CorreoPersona, @UsuarioPersona, @PasswordPersona');
+        res.send(result);
     } catch (error) {
         console.error("Error al crear persona:", error);
         res.status(500).send("Error al crear persona");
     }
-
 }

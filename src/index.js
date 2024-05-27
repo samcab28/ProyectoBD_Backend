@@ -1,11 +1,12 @@
 import app from './app.js';
-import {getConnection} from './database/connection.js';
+import { getConnection } from './database/connection.js';
 
+// Llamada a la función de conexión a la base de datos
 getConnection();
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado en el puerto ${PORT}`);
-});
+const PORT = 3001;
 
-console.log("servidor iniciado 2");
+// Iniciar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor backend corriendo en http://localhost:${PORT}`);
+});

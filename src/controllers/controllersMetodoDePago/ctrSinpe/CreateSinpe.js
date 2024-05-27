@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Contralador para crear Sinpe 
 export const createSinpe = async (req, res) => {

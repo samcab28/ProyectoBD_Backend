@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para obtener todas las HistorialLogins
 export const getHistorialLogin = async (req, res) => {

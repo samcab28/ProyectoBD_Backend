@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para borrar un Efectivo existente por ID
 export const deleteEfectivo = async (req, res) => {

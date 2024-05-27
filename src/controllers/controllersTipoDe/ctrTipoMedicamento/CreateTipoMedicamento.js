@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Contralador para crear TipoMedicamento
 export const createTipoMedicamento = async (req, res) => {

@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para obtener todas las Efectivo
 export const getEfectivo = async (req, res) => {

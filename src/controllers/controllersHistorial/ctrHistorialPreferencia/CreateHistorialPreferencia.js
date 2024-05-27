@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Contralador para crear HistorialPreferencia
 export const createHistorialPreferencia = async (req, res) => {

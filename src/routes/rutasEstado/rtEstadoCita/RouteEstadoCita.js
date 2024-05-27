@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getEstadoCita, getEstadoCitaById } from '../../controllers/ctrEstadoCita/ConsultaEstadoCita.js';
+import { getEstadoCita, getEstadoCitaById } from '../../../controllers/controllersEstado/ctrEstadoCita/ConsultaEstadoCita.js';
 
 // Crear una nueva instancia de Router
 const router = Router();

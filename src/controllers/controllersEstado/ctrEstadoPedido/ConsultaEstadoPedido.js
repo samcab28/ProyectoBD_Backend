@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para obtener todas los EstadoPedido
 export const getEstadoPedido = async (req, res) => {

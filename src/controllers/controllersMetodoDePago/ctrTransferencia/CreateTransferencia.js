@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Contralador para crear Transferencia 
 export const createTransferencia = async (req, res) => {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getMetodoPago, getMetodoPagoById } from '../../../controllers/controllersMetodoDePago/ctrMetodoPago/ConsultaMetodoPago'
+import { getMetodoPago, getMetodoPagoById } from '../../../controllers/controllersMetodoDePago/ctrMetodoPago/ConsultaMetodoPago.js'
 
 // Crear una nueva instancia de Router
 const router = Router();

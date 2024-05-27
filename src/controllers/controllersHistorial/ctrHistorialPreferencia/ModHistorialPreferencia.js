@@ -1,4 +1,4 @@
-import { getConnection } from "../../database/connection.js";
+import { getConnection } from "../../../database/connection.js";
 import sql from 'mssql';
 
 // Controlador para modificar un HistorialPreferencia existente por ID

@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para borrar un HistorialLogin existente por ID
 export const deleteHistorialLogin = async (req, res) => {

@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para borrar un Transferencia existente por ID
 export const deleteTransferencia = async (req, res) => {

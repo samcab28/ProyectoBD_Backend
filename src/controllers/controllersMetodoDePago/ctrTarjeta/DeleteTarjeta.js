@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para borrar un Tarjeta existente por ID
 export const deleteTarjeta = async (req, res) => {

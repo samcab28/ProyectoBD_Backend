@@ -1,4 +1,4 @@
-import {getConnection} from "../../database/connection.js";
+import {getConnection} from "../../../database/connection.js";
 
 // Controlador para borrar un Sinpe existente por ID
 export const deleteSinpe = async (req, res) => {

@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { getHistorialPreferencia, getHistorialPreferenciaById } from '../../controllers/ctrHistorialPreferencia/ConsultaHistorialPreferencia.js';
-import { deleteHistorialPreferencia } from "../../controllers/ctrHistorialPreferencia/DeleteHistorialPreferencia.js";
-import {createHistorialPreferencia} from "../../controllers/ctrHistorialPreferencia/CreateHistorialPreferencia.js"
-import {updateHistorialPreferencia} from "../../controllers/ctrHistorialPreferencia/ModHistorialPreferencia.js";
+import { getHistorialPreferencia, getHistorialPreferenciaById } from '../../../controllers/controllersHistorial/ctrHistorialPreferencia/ConsultaHistorialPreferencia.js';
+import { deleteHistorialPreferencia } from "../../../controllers/controllersHistorial/ctrHistorialPreferencia/DeleteHistorialPreferencia.js";
+import {createHistorialPreferencia} from "../../../controllers/controllersHistorial/ctrHistorialPreferencia/CreateHistorialPreferencia.js"
+import {updateHistorialPreferencia} from "../../../controllers/controllersHistorial/ctrHistorialPreferencia/ModHistorialPreferencia.js";
 
 // Crear una nueva instancia de Router
 const router = Router();

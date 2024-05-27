@@ -29,4 +29,3 @@ export const getPersonaById = async (req, res) => {
         res.status(500).send("Error al obtener una sola persona");
     }
 }
-

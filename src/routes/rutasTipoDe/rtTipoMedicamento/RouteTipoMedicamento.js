@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { getTipoMedicamento, getTipoMedicamentoById } from '../../controllers/ctrTipoDe/ConsultaTipoMedicamento.js';
-import { deleteTipoMedicamento } from "../../controllers/controllersTipoDe/ctrTipoMedicamento/DeleteTipoMedicamento.js";
-import { createTipoMedicamento } from "../../controllers/controllersTipoDe/ctrTipoMedicamento/CreateTipoMedicamento.js"
-import { updateTipoMedicamento } from "../../controllers/controllersTipoDe/ctrTipoMedicamento/ModTipoMedicamento.js";
+import { getTipoMedicamento, getTipoMedicamentoById } from '../../../controllers/controllersTipoDe/ctrTipoMedicamento/ConsultaTipoMedicamento.js'
+import { deleteTipoMedicamento } from "../../../controllers/controllersTipoDe/ctrTipoMedicamento/DeleteTipoMedicamento.js";
+import { createTipoMedicamento } from "../../../controllers/controllersTipoDe/ctrTipoMedicamento/CreateTipoMedicamento.js"
+import { updateTipoMedicamento } from "../../../controllers/controllersTipoDe/ctrTipoMedicamento/ModTipoMedicamento.js";
 
 // Crear una nueva instancia de Router
 const router = Router();

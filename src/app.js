@@ -22,6 +22,20 @@ import RouteDetallePedido from "./routes/rtDetallePedido/RouteDetallePedido.js";
 import RouteEnvio from "./routes/rtEnvio/RouteEnvio.js";
 import RouteServicioPredeterminado from "./routes/rtServicioPredeterminado/RouteServicioPredeterminado.js";
 import RouteHistorialPreferencia from "./routes/rutasHistorial/rtHistorialPreferencia/RouteHistorialPreferencia.js";
+import RouteSexo from "./routes/rtSexo/RouteSexo.js";
+import RouteTipoPersona from "./routes/rutasTipoDe/rtTipoPersona/RouteTipoPersona.js";
+import RouteEstadoPedido from "./routes/rutasEstado/rtEstadoPedido/RouteEstadoPedido.js";
+import RouteEstadoCita from "./routes/rutasEstado/rtEstadoCita/RouteEstadoCita.js";
+import RouteEstadoEnvio from "./routes/rutasEstado/rtEstadoEnvio/RouteEstadoEnvio.js";
+import RouteTipoProducto from "./routes/rutasTipoDe/rtTipoProducto/RouteTipoProducto.js";
+import RouteUnidadMedida from "./routes/rtUnidadMedida/RouteUnidadMedida.js";
+import RouteMetodoPago from "./routes/rutasTipoMetodoPago/rtmetodoPago/RouteMetodoPago.js";
+import RouteEfectivo from "./routes/rutasTipoMetodoPago/rtEfectivo/RouteEfectivo.js";
+import RouteSinpe from "./routes/rutasTipoMetodoPago/rtSinpe/RouteSinpe.js";
+import RouteTransferencia from "./routes/rutasTipoMetodoPago/rtTransferencia/RouteTransferencia.js";
+import RouteTarjeta from "./routes/rutasTipoMetodoPago/rtTarjeta/RouteTarjeta.js";
+import RouteHistorialClick from "./routes/rutasHistorial/rtHistorialClick/RouteHistorialClick.js";
+import RouteHistorialLogin from "./routes/rutasHistorial/rtHistorialLogin/RouteHistorialLogin.js";
 
 const app = express();
 
@@ -50,5 +64,21 @@ app.use(RouteDetallePedido);
 app.use(RouteEnvio); 
 app.use(RouteServicioPredeterminado);
 app.use(RouteHistorialPreferencia); 
+
+app.use(RouteSexo);
+app.use(RouteTipoPersona);
+app.use(RouteEstadoPedido); 
+app.use(RouteEstadoCita); 
+app.use(RouteEstadoEnvio);
+app.use(RouteTipoProducto); 
+app.use(RouteUnidadMedida); 
+app.use(RouteMetodoPago); 
+app.use(RouteEfectivo); 
+app.use(RouteSinpe);
+app.use(RouteTransferencia);
+app.use(RouteTarjeta); 
+app.use(RouteHistorialClick);
+app.use(RouteHistorialLogin);
+
 
 export default app;

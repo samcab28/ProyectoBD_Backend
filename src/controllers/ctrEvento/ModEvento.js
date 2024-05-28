@@ -5,19 +5,19 @@ import sql from 'mssql';
 export const updateEvento = async (req, res) => {
     try {
         const { id } = req.params; // Obtener el ID de los parámetros de la URL
-        const { CampoModificar, ValorNuevo } = req.body; // Obtener los datos del cuerpo de la solicitud
+        const { campoModificar, valorNuevo } = req.body; // Obtener los datos del cuerpo de la solicitud
 
         // Validar los datos de la solicitud
-        if (!CampoModificar || !ValorNuevo) {
-            return res.status(400).send("Los campos CampoModificar y ValorNuevo son obligatorios.");
+        if (!campoModificar || !valorNuevo) {
+            return res.status(400).send("Los campos campoModificar y ValorNuevo son obligatorios.");
         }
 
         // Crear una nueva conexión a la base de datos
         const pool = await getConnection();
         const result = await pool.request()
             .input('IdEvento', id)
-            .input('CampoModificar', sql.NVarChar(128), CampoModificar)
-            .input('ValorNuevo', sql.NVarChar(255), ValorNuevo)
+            .input('CampoModificar', sql.NVarChar(128), campoModificar)
+            .input('ValorNuevo', sql.NVarChar(255), valorNuevo)
             .query('exec EventoModificar @IdEvento, @CampoModificar, @ValorNuevo'); // Utilizar una consulta parametrizada
 
         // Enviar una respuesta con el resultado de la consulta

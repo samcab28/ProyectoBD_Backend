@@ -1,6 +1,7 @@
-import {getConnection} from "../../database/connection.js";
+import { getConnection } from "../../database/connection.js";
+import sql from 'mssql';
 
-// Contralador para crear ServicioPredetermiando
+// Controlador para crear ServicioPredeterminado
 export const createServicioPredeterminado = async (req, res) => {
     try {
         const { Descripcion, Precio } = req.body; // Obtener los datos del cuerpo de la petición

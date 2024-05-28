@@ -1,14 +1,15 @@
-import {getConnection} from "../../../database/connection.js";
+import { getConnection } from "../../../database/connection.js";
+import sql from 'mssql';
 
-// Contralador para crear HistorialClick 
+// Controlador para crear HistorialClick
 export const createHistorialClick = async (req, res) => {
     try {
         const { fechaClick, IdPersona, Accion } = req.body; // Obtener los datos del cuerpo de la petición
         const pool = await getConnection();
         const result = await pool.request()
-            .input('fechaClick', fechaClick)
-            .input('IdPersona', IdPersona)
-            .input('Accion', Accion)
+            .input('fechaClick', sql.DateTime, fechaClick) // Ajustar el tipo de dato según la base de datos
+            .input('IdPersona', sql.Int, IdPersona) // Ajustar el tipo de dato según la base de datos
+            .input('Accion', sql.NVarChar(50), Accion) // Ajustar el tipo de dato según la base de datos
             .query('exec HistorialClicksCrear @fechaClick, @IdPersona, @Accion'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.json({status: "HistorialClick creado"});

@@ -1,6 +1,5 @@
 import {getConnection} from "../../database/connection.js";
 
-
 // Controlador para borrar una persona existente por ID
 export const deleteAnimal = async (req, res) => {
     try{

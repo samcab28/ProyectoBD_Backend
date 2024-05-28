@@ -36,6 +36,7 @@ import RouteTransferencia from "./routes/rutasTipoMetodoPago/rtTransferencia/Rou
 import RouteTarjeta from "./routes/rutasTipoMetodoPago/rtTarjeta/RouteTarjeta.js";
 import RouteHistorialClick from "./routes/rutasHistorial/rtHistorialClick/RouteHistorialClick.js";
 import RouteHistorialLogin from "./routes/rutasHistorial/rtHistorialLogin/RouteHistorialLogin.js";
+import RouteCobro from "./routes/rtCobro/RouteCobro.js";
 
 const app = express();
 
@@ -51,20 +52,18 @@ app.use(RouteSucursal)
 app.use(RouteUrl);
 app.use(RouteAnimal);
 app.use(RouteMarcaProducto);
-
-// HACER PRUEBAS
 app.use(RouteCitaMedica);
 app.use(RouteTipoMedicamento); 
 app.use(RouteProductoRecetado);
 app.use(RouteExpediente);
 app.use(RouteEvento); 
 app.use(RouteDivisa);
+app.use(RouteCobro);
 app.use(RoutePedido); 
 app.use(RouteDetallePedido); 
 app.use(RouteEnvio); 
 app.use(RouteServicioPredeterminado);
 app.use(RouteHistorialPreferencia); 
-
 app.use(RouteSexo);
 app.use(RouteTipoPersona);
 app.use(RouteEstadoPedido); 
@@ -72,7 +71,7 @@ app.use(RouteEstadoCita);
 app.use(RouteEstadoEnvio);
 app.use(RouteTipoProducto); 
 app.use(RouteUnidadMedida); 
-app.use(RouteMetodoPago); 
+app.use(RouteMetodoPago);
 app.use(RouteEfectivo); 
 app.use(RouteSinpe);
 app.use(RouteTransferencia);

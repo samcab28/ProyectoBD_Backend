@@ -5,13 +5,13 @@ import sql from 'mssql';
 export const updateDivisa = async (req, res) => {
     try {
         const { id } = req.params; // Obtener el ID de los parámetros de la URL
-        const { CampoModificar, ValorNuevo } = req.body; // Obtener los datos del cuerpo de la petición
+        const { campoModificar, valorNuevo } = req.body; // Obtener los datos del cuerpo de la petición
 
         const pool = await getConnection();
         const result = await pool.request()
             .input('IdDivisa', sql.Int, id)
-            .input('CampoModificar', sql.NVarChar(128), CampoModificar)
-            .input('ValorNuevo', sql.NVarChar(255), ValorNuevo)
+            .input('CampoModificar', sql.NVarChar(128), campoModificar)
+            .input('ValorNuevo', sql.NVarChar(255), valorNuevo)
             .query('exec DivisaModificar @IdDivisa, @CampoModificar, @ValorNuevo'); // Utilizar una consulta parametrizada
 
         // Enviar una respuesta con el resultado de la consulta

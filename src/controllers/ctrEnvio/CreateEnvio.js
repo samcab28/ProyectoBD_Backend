@@ -1,15 +1,16 @@
-import {getConnection} from "../../database/connection.js";
+import { getConnection } from "../../database/connection.js";
+import sql from 'mssql';
 
-// Contralador para crear Envio
+// Controlador para crear Envio
 export const createEnvio = async (req, res) => {
     try {
         const { FechaEnvio, Ubicacion, IdPedido, EstadoEnvio } = req.body; // Obtener los datos del cuerpo de la petición
         const pool = await getConnection();
         const result = await pool.request()
-            .input('FechaEnvio', FechaEnvio)
-            .input('Ubicacion', Ubicacion)
-            .input('IdPedido', IdPedido)
-            .input('EstadoEnvio', EstadoEnvio)
+            .input('FechaEnvio', sql.DateTime, FechaEnvio)
+            .input('Ubicacion', sql.NVarChar, Ubicacion)
+            .input('IdPedido', sql.Int, IdPedido)
+            .input('EstadoEnvio', sql.Int, EstadoEnvio)
             .query('exec EnvioCrear @FechaEnvio, @Ubicacion, @IdPedido, @EstadoEnvio'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.json({ message: 'Envio creado correctamente' });

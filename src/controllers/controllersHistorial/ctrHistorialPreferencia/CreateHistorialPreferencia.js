@@ -1,13 +1,14 @@
-import {getConnection} from "../../../database/connection.js";
+import { getConnection } from "../../../database/connection.js";
+import sql from 'mssql';
 
-// Contralador para crear HistorialPreferencia
+// Controlador para crear HistorialPreferencia
 export const createHistorialPreferencia = async (req, res) => {
     try {
         const { IdPersona, IdProducto } = req.body; // Obtener los datos del cuerpo de la petición
         const pool = await getConnection();
         const result = await pool.request()
-            .input('IdPersona', IdPersona)
-            .input('IdProducto', IdProducto)
+            .input('IdPersona', sql.Int, IdPersona)
+            .input('IdProducto', sql.Int, IdProducto)
             .query('exec PreferenciasUsuarioCrear @IdPersona, @IdProducto'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.json({ message: 'HistorialPreferencia creado correctamente' });

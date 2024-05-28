@@ -6,8 +6,8 @@ export const deleteTipoMedicamento = async (req, res) => {
         const { id } = req.params; // Obtener el ID de los parámetros de la URL
         const pool = await getConnection();
         const result = await pool.request()
-            .input('id', id)
-            .query('exec TipoMedicamentoEliminar @id'); // Utilizar una consulta parametrizada
+            .input('IdTMedicamento', id)
+            .query('exec TipoMedicamentoEliminar @IdTMedicamento'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.send(result.recordset);
     } catch (error) {

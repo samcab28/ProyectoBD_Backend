@@ -13,6 +13,19 @@ export const getMascota = async (req, res) => {
     }
 }
 
+//obtener detalles mascota
+export const getMascotaDetalle = async (req, res) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request().query('EXEC MascotaDetalles');
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener mascotas:", error);
+        res.status(500).send("Error al obtener mascotas");
+    }
+}
+
 // Controlador para obtener una URL por ID
 export const getMascotaById = async (req, res) => {
     try {

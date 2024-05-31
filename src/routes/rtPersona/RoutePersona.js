@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPersona, getPersonaById } from '../../controllers/ctrPersona/ConsultaPersona.js';
+import { getPersona, getPersonaById, getPersonaByTipo} from '../../controllers/ctrPersona/ConsultaPersona.js';
 import { deletePersona} from "../../controllers/ctrPersona/DeletePersona.js";
 import {createPersona} from "../../controllers/ctrPersona/CreatePersona.js"
 import {updatePersona} from "../../controllers/ctrPersona/ModPersona.js";
@@ -12,6 +12,9 @@ router.get('/persona', getPersona);
 
 // Ruta para obtener una sola persona por ID
 router.get('/persona/:id', getPersonaById);
+
+// Ruta para obtener personas por tipo
+router.get('/persona/tipo/:tipo', getPersonaByTipo);
 
 // Ruta para crear una nueva persona
 router.post('/persona', createPersona);

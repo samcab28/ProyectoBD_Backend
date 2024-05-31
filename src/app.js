@@ -47,14 +47,12 @@ import RouteTarjeta from "./routes/rutasTipoMetodoPago/rtTarjeta/RouteTarjeta.js
 import RouteHistorialClick from "./routes/rutasHistorial/rtHistorialClick/RouteHistorialClick.js";
 import RouteHistorialLogin from "./routes/rutasHistorial/rtHistorialLogin/RouteHistorialLogin.js";
 import RouteCobro from "./routes/rtCobro/RouteCobro.js";
-<<<<<<< Updated upstream
-=======
 import RouteResena from "./routes/rtResena/RouteResena.js";
 import RouteCarrito from "./routes/rtCarrito/RouteCarrito.js"
->>>>>>> Stashed changes
 
 
 //declaracion de uso de los routers
+app.use(RouteResena)
 app.use(RouteMascota);
 app.use(RouteMedicamento);
 app.use(RoutePersona);
@@ -75,11 +73,11 @@ app.use(RouteEnvio);
 app.use(RouteServicioPredeterminado);
 app.use(RouteHistorialPreferencia);
 app.use(RouteCobro);
-app.use(RoutePedido); 
-app.use(RouteDetallePedido); 
-app.use(RouteEnvio); 
+app.use(RoutePedido);
+app.use(RouteDetallePedido);
+app.use(RouteEnvio);
 app.use(RouteServicioPredeterminado);
-app.use(RouteHistorialPreferencia); 
+app.use(RouteHistorialPreferencia);
 app.use(RouteSexo);
 app.use(RouteTipoPersona);
 app.use(RouteEstadoPedido);
@@ -89,10 +87,10 @@ app.use(RouteTipoProducto);
 app.use(RouteUnidadMedida);
 app.use(RouteMetodoPago);
 app.use(RouteEfectivo);
-app.use(RouteTipoProducto); 
-app.use(RouteUnidadMedida); 
+app.use(RouteTipoProducto);
+app.use(RouteUnidadMedida);
 app.use(RouteMetodoPago);
-app.use(RouteEfectivo); 
+app.use(RouteEfectivo);
 app.use(RouteSinpe);
 app.use(RouteTransferencia);
 app.use(RouteTarjeta);

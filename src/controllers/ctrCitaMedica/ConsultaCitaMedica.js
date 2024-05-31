@@ -38,7 +38,7 @@ export const getCitaMedicaByEstado = async (req, res) => {
         const result = await pool.request()
             .input('idPersona', idPersona)
             .input('estadoCita', estadoCita)
-            .query('exec ConsultarCitasPorEstado @idPersona, @estadoCita'); // Utilizar una consulta parametrizada
+            .query('exec CitaMedicaConsultaPorEstado @idPersona, @estadoCita'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta
         res.send(result.recordset);
     } catch (error) {

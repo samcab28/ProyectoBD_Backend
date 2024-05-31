@@ -21,8 +21,6 @@ import RouteSucursal from "./routes/rtSucursal/RouteSucursal.js";
 import RouteUrl from "./routes/rtUrl/RouteUrl.js";
 import RouteAnimal from "./routes/rtAnimal/RouteAnimal.js";
 import RouteMarcaProducto from "./routes/rtMarcaProducto/RouteMarcaProducto.js";
-
-// HACER PRUEBAS
 import RouteCitaMedica from "./routes/rtCitaMedica/RouteCitaMedica.js";
 import RouteTipoMedicamento from "./routes/rutasTipoDe/rtTipoMedicamento/RouteTipoMedicamento.js";
 import RouteProductoRecetado from "./routes/rtProductoRecetado/RouteProductoRecetado.js";
@@ -49,6 +47,11 @@ import RouteTarjeta from "./routes/rutasTipoMetodoPago/rtTarjeta/RouteTarjeta.js
 import RouteHistorialClick from "./routes/rutasHistorial/rtHistorialClick/RouteHistorialClick.js";
 import RouteHistorialLogin from "./routes/rutasHistorial/rtHistorialLogin/RouteHistorialLogin.js";
 import RouteCobro from "./routes/rtCobro/RouteCobro.js";
+<<<<<<< Updated upstream
+=======
+import RouteResena from "./routes/rtResena/RouteResena.js";
+import RouteCarrito from "./routes/rtCarrito/RouteCarrito.js"
+>>>>>>> Stashed changes
 
 
 //declaracion de uso de los routers
@@ -71,7 +74,6 @@ app.use(RouteDetallePedido);
 app.use(RouteEnvio);
 app.use(RouteServicioPredeterminado);
 app.use(RouteHistorialPreferencia);
-
 app.use(RouteCobro);
 app.use(RoutePedido); 
 app.use(RouteDetallePedido); 
@@ -96,6 +98,7 @@ app.use(RouteTransferencia);
 app.use(RouteTarjeta);
 app.use(RouteHistorialClick);
 app.use(RouteHistorialLogin);
+app.use(RouteCarrito);
 
 
 export default app;

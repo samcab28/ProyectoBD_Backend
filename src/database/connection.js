@@ -1,27 +1,58 @@
+// connection.js
+
 import sql from 'mssql';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const cron = require('node-cron');
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Obtener la ruta del directorio actual
+const currentDir = dirname(fileURLToPath(import.meta.url));
 
 const dbSettings = {
     user: "Admin",
     password: "luis",
+<<<<<<< Updated upstream
     server: "localhost",
+=======
+    server: "25.7.30.30",
+>>>>>>> Stashed changes
     database: "Proyecto2Bd_2024",
-    options:{
+    options: {
         encrypt: false,
         trustServerCertificate: true,
     }
-}
+};
 
+<<<<<<< Updated upstream
 export const getConnection = async() => {
     try{
+=======
+export const getConnection = async () => {
+    try {
+>>>>>>> Stashed changes
         const pool = await sql.connect(dbSettings);
-
-        const result = await pool.request().query("SELECT GETDATE()")
-        console.log(result);
-        console.log("conexion correcta de base de datos")
+        console.log("Conexión exitosa a la base de datos");
         return pool;
+    } catch (error) {
+        console.error("Error en la conexión a la base de datos:", error);
     }
-    catch(error){
-        console.error("error en conexion a la base de datos")
-    }
-}
+};
 
+export const scheduleBackup = () => {
+    cron.schedule('6 23 * * *', async () => { // Ejecutar a las 10:41 PM todos los días
+        try {
+            const pool = await sql.connect(dbSettings);
+            const backupPath = `C:\\Users\\samir\\Documents\\BackUpSqlProyecto\\backup_${new Date().toISOString().replace(/[:.]/g, '-')}.bak`;
+            const query = `BACKUP DATABASE ${dbSettings.database} TO DISK = '${backupPath}'`;
+            await pool.request().query(query);
+            console.log("Backup realizado con éxito en:", backupPath);
+        } catch (error) {
+            console.error("Error al realizar el backup:", error);
+        }
+    }, {
+        scheduled: true,
+        timezone: "America/Costa_Rica" // Cambia a tu zona horaria
+    });
+};

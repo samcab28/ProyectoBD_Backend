@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import {getConnection, scheduleBackup} from "./database/connection.js";
 
 const app = express();
 
@@ -11,6 +12,13 @@ app.use(cors({
 
 // Usar JSON en la aplicación
 app.use(express.json());
+
+
+(async () => {
+    await getConnection(); // Conectar a la base de datos
+    scheduleBackup(); // Programar backups
+})();
+
 
 //importacion de los routers
 import RouteMascota from "./routes/rtMascota/RouteMascota.js";

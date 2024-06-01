@@ -6,7 +6,7 @@ export const getPersona = async (req, res) => {
         const pool = await getConnection();
         const result = await pool.request().query('exec PersonaConsulta');
         // Enviar una respuesta con el resultado de la consulta
-        res.send(result);
+        res.send(result.recordset);
     } catch (error) {
         console.error("Error al obtener personas:", error);
         res.status(500).send("Error al obtener personas");
@@ -29,3 +29,23 @@ export const getPersonaById = async (req, res) => {
         res.status(500).send("Error al obtener una sola persona");
     }
 }
+
+
+
+//get persona segun tipo
+export const getPersonaByTipo = async (req, res) => {
+    try {
+        const { tipo } = req.params; // Obtener el ID de los parámetros de la URL
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('tipo', tipo)
+            .query('EXEC GetPersonasByTipoPersona @tipo'); // Utilizar una consulta parametrizada
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener la data:", error);
+        res.status(500).send("Error al obtener la data");
+    }
+}
+
+

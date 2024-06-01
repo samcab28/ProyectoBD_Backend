@@ -13,11 +13,8 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 const dbSettings = {
     user: "Admin",
     password: "luis",
-<<<<<<< Updated upstream
     server: "localhost",
-=======
-    server: "25.7.30.30",
->>>>>>> Stashed changes
+    server: "25.7.30.30",   // Cambiar ip real al momento con samir
     database: "Proyecto2Bd_2024",
     options: {
         encrypt: false,
@@ -25,13 +22,11 @@ const dbSettings = {
     }
 };
 
-<<<<<<< Updated upstream
+
 export const getConnection = async() => {
     try{
-=======
 export const getConnection = async () => {
     try {
->>>>>>> Stashed changes
         const pool = await sql.connect(dbSettings);
         console.log("Conexión exitosa a la base de datos");
         return pool;

@@ -13,18 +13,15 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 const dbSettings = {
     user: "Admin",
     password: "luis",
-    server: "localhost",
     server: "25.7.30.30",   // Cambiar ip real al momento con samir
     database: "Proyecto2Bd_2024",
-    options: {
+    options:{
         encrypt: false,
         trustServerCertificate: true,
     }
-};
+}
 
 
-export const getConnection = async() => {
-    try{
 export const getConnection = async () => {
     try {
         const pool = await sql.connect(dbSettings);
@@ -36,7 +33,7 @@ export const getConnection = async () => {
 };
 
 export const scheduleBackup = () => {
-    cron.schedule('6 23 * * *', async () => { // Ejecutar a las 10:41 PM todos los días
+    cron.schedule('30 23 * * *', async () => { // Ejecutar a las 10:41 PM todos los días
         try {
             const pool = await sql.connect(dbSettings);
             const backupPath = `C:\\Users\\samir\\Documents\\BackUpSqlProyecto\\backup_${new Date().toISOString().replace(/[:.]/g, '-')}.bak`;

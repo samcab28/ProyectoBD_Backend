@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {getResena, getResenaById} from "../../controllers/ctrResena/ConsultaResena.js";
+import {getResena, getResenaById, getResenaCompletaById, getResenaCompleta, getResenabyIdProducto, getPuntuacionByProducto} from "../../controllers/ctrResena/ConsultaResena.js";
 import {DeleteResena} from "../../controllers/ctrResena/DeleteResena.js";
 import {createResena} from "../../controllers/ctrResena/CreateResena.js";
 
@@ -11,6 +11,18 @@ router.get('/resena', getResena);
 
 // Ruta para obtener una sola persona por ID
 router.get('/resena/:id', getResenaById);
+
+// Ruta para obtener resena completa
+router.get('/resenaCompleta', getResenaCompleta);
+
+// Ruta para obtener resena completa ID
+router.get('/resenaCompleta/:id', getResenaCompletaById);
+
+//router para obtener resena segun producto
+router.get('/resenaByProducto/:id', getResenabyIdProducto);
+
+//router para obtener puntuacion segun producto
+router.get('/puntuacion/:id', getPuntuacionByProducto);
 
 // Ruta para crear una nueva persona
 router.post('/resena', createResena);

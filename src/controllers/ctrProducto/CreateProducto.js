@@ -7,8 +7,6 @@ export const createProducto = async (req, res) => {
             NombreProducto,
             PrecioProducto,
             DescripcionProducto,
-            CantidadDisponible,
-            IdSucursal,
             IdTipoPro,
             IdMarcaPro,
             IdURL
@@ -19,12 +17,10 @@ export const createProducto = async (req, res) => {
             .input('NombreProducto', NombreProducto)
             .input('PrecioProducto', PrecioProducto)
             .input('DescripcionProducto', DescripcionProducto)
-            .input('CantidadDisponible', CantidadDisponible)
-            .input('IdSucursal', IdSucursal)
             .input('IdTipoPro', IdTipoPro)
             .input('IdMarcaPro', IdMarcaPro)
             .input('IdURL', IdURL)
-            .query('exec ProductoCrear @NombreProducto, @PrecioProducto, @DescripcionProducto, @CantidadDisponible, @IdSucursal, @IdTipoPro, @IdMarcaPro, @IdURL');
+            .query('exec ProductoCrear @NombreProducto, @PrecioProducto, @DescripcionProducto, @IdTipoPro, @IdMarcaPro, @IdURL');
 
         res.send(result);
     } catch (error) {

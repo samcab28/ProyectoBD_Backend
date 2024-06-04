@@ -1,5 +1,6 @@
+// src/routes/almacenamiento.js
 import { Router } from 'express';
-import { getAlmacenamientoCantidadProducto, getAlmacenamientos } from '../../controllers/ctrAlmacenamiento/ConsultarAlmacenamiento.js';
+import { getAlmacenamientoCantidadProductoGeneral, getAlmacenamientoCantidadProductoPorSucursal, getAlmacenamientos } from '../../controllers/ctrAlmacenamiento/ConsultarAlmacenamiento.js';
 import { createAlmacenamiento } from '../../controllers/ctrAlmacenamiento/CreateAlmacenamiento.js';
 import { deleteAlmacenamiento } from '../../controllers/ctrAlmacenamiento/DeleteAlmacenamiento.js';
 
@@ -10,7 +11,10 @@ const router = Router();
 router.get('/almacenamiento', getAlmacenamientos);
 
 // Ruta para obtener la cantidad total de un producto por id producto
-router.get('/almacenamiento/:id', getAlmacenamientoCantidadProducto);
+router.get('/almacenamiento/cantidad/general/:id', getAlmacenamientoCantidadProductoGeneral);
+
+// Ruta para obtener la cantidad de un producto por sucursal
+router.get('/almacenamiento/cantidad/:id/sucursal/:sucursalId', getAlmacenamientoCantidadProductoPorSucursal);
 
 // Ruta para crear un nuevo registro de almacenamiento
 router.post('/almacenamiento', createAlmacenamiento);

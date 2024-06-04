@@ -60,13 +60,16 @@ import RouteHistorialClick from "./routes/rutasHistorial/rtHistorialClick/RouteH
 import RouteHistorialLogin from "./routes/rutasHistorial/rtHistorialLogin/RouteHistorialLogin.js";
 import RouteCobro from "./routes/rtCobro/RouteCobro.js";
 import RouteResena from "./routes/rtResena/RouteResena.js";
-import RouteCarrito from "./routes/rtCarrito/RouteCarrito.js"; 
-import RouteAlmacenamiento from "./routes/rtAlmacenamiento/RouteAlmacenamiento.js"; 
+import RouteCarrito from "./routes/rtCarrito/RouteCarrito.js"
+import RouteAlmacenamiento from "./routes/rtAlmacenamiento/RouteAlmacenamiento.js"
+import RouteDireccionPersona from "./routes/rtDireccionPersona/RouteDireccionPersona.js";
 import RouteInfoTarjeta from "./routes/rtInfoTarjeta/RouteInfoTarjeta.js"; 
 
 
+
 //declaracion de uso de los routers
-app.use(RouteResena)
+app.use(RouteDireccionPersona);
+app.use(RouteResena);
 app.use(RouteMascota);
 app.use(RouteMedicamento);
 app.use(RoutePersona);

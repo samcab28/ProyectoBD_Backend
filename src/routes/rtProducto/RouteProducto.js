@@ -4,6 +4,7 @@ import {createProducto} from "../../controllers/ctrProducto/CreateProducto.js";
 import {deleteProducto} from "../../controllers/ctrProducto/DeleteProducto.js";
 import {updateProducto} from "../../controllers/ctrProducto/ModProducto.js";
 
+// Crear una nueva instancia de Router
 const router = Router();
 
 // Ruta para obtener todos los productos
@@ -24,4 +25,5 @@ router.put('/producto/:id', updateProducto);
 // Ruta para borrar un producto existente por ID
 router.delete('/producto/:id', deleteProducto);
 
+// Exportar el router para que pueda ser utilizado en otros archivos
 export default router;

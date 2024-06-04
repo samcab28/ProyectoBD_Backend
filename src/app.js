@@ -62,10 +62,11 @@ import RouteCobro from "./routes/rtCobro/RouteCobro.js";
 import RouteResena from "./routes/rtResena/RouteResena.js";
 import RouteCarrito from "./routes/rtCarrito/RouteCarrito.js"
 import RouteAlmacenamiento from "./routes/rtAlmacenamiento/RouteAlmacenamiento.js"
-
+import RouteDireccionPersona from "./routes/rtDireccionPersona/RouteDireccionPersona.js";
 
 //declaracion de uso de los routers
-app.use(RouteResena)
+app.use(RouteDireccionPersona);
+app.use(RouteResena);
 app.use(RouteMascota);
 app.use(RouteMedicamento);
 app.use(RoutePersona);

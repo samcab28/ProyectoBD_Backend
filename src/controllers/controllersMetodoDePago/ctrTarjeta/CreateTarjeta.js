@@ -4,19 +4,16 @@ import sql from 'mssql';
 // Controlador para crear Tarjeta
 export const createTarjeta = async (req, res) => {
     try {
-        const { NombrePropietario, NumeroTarjeta, CodigoSeguridad, FechaVencimiento, IdCobro } = req.body; // Obtener los datos del cuerpo de la petición
+        const { IdInformacionTarjeta, IdCobro } = req.body;
         const pool = await getConnection();
         const result = await pool.request()
-            .input('NombrePropietario', sql.NVarChar(256), NombrePropietario)
-            .input('NumeroTarjeta', sql.BigInt, NumeroTarjeta) // Cambiado a BigInt
-            .input('CodigoSeguridad', sql.Int, CodigoSeguridad)
-            .input('FechaVencimiento', sql.Date, FechaVencimiento)
+            .input('IdInformacionTarjeta', sql.Int, IdInformacionTarjeta)
             .input('IdCobro', sql.Int, IdCobro)
-            .query('exec TarjetaCrear @NombrePropietario, @NumeroTarjeta, @CodigoSeguridad, @FechaVencimiento, @IdCobro');
-        // Enviar una respuesta con el resultado de la consulta
-        res.json({ message: 'Tarjeta creado correctamente' });
+            .query('exec TarjetaCrear @IdInformacionTarjeta, @IdCobro');
+        res.json({ message: 'Tarjeta creada correctamente' });
     } catch (error) {
-        console.error("Error al crear Tarjeta:", error);
-        res.status(500).send("Error al crear Tarjeta");
+        console.error("Error al crear tarjeta:", error);
+        res.status(500).send("Error al crear tarjeta");
     }
-}
+};
+

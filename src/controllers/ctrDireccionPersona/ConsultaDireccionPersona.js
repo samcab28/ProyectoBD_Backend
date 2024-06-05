@@ -1,6 +1,6 @@
 import {getConnection} from "../../database/connection.js";
 
-// Controlador para obtener todas las cobros
+// Controlador para obtener todas las dirreciones de personas
 export const getDireccionPersona = async (req, res) => {
     try {
         const pool = await getConnection();
@@ -13,7 +13,7 @@ export const getDireccionPersona = async (req, res) => {
     }
 }
 
-// Controlador para obtener cobro por id
+// Controlador para obtener dirrecion de persona por id dirrecion
 export const getDireccionPersonaByIdDir = async (req, res) => {
     try {
         const { id } = req.params; // Obtener el ID de los parámetros de la URL
@@ -29,7 +29,7 @@ export const getDireccionPersonaByIdDir = async (req, res) => {
     }
 }
 
-
+// Controlador para obtener las dirreciones de una persona por el id persona 
 export const getDireccionPersonaByIdPer = async (req, res) => {
     try {
         const { id } = req.params; // Obtener el ID de los parámetros de la URL

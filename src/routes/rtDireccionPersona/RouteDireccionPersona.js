@@ -11,10 +11,10 @@ router.get('/dirPersona', getDireccionPersona);
 //detalles mascota
 router.get('/dirPersona/:id', getDireccionPersonaByIdDir);
 
-// Ruta para obtener una sola mascota por ID
+// Ruta para obtener las dirreciones de una persona por id persona 
 router.get('/dirPersonaByPer/:id', getDireccionPersonaByIdPer);
 
-// Ruta para crear una nueva mascota
+// Ruta para crear una nueva DirrecionPersona
 router.post('/dirPersona', createDireccion);
 
 // Ruta para borrar una mascota existente por ID

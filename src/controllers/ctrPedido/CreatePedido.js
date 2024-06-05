@@ -1,20 +1,15 @@
-// src/controllers/ctrPedido/CreatePedido.js
 import { getConnection } from "../../database/connection.js";
 import sql from "mssql";
 
-// Controlador para crear Cobro, Pedido y DetallesPedido
+// Controlador para crear Cobro, Pedido, DetallePedido y Envio
 export const createPedido = async (req, res) => {
-    const { IdPersona, MontoTotal, IdMetPago, IdDivisa, IdInformacionTarjeta, NumComprobante, DetallesPedido } = req.body;
+    const { IdPersona, MontoTotal, IdMetPago, IdDivisa, IdInformacionTarjeta, NumComprobante, DetallesPedido, IdDireccion } = req.body;
 
     try {
         const pool = await getConnection();
 
-        // Comenzar transacción
-        const transaction = new sql.Transaction(pool);
-        await transaction.begin();
-
         // Crear Cobro
-        const cobroResult = await transaction.request()
+        const cobroResult = await pool.request()
             .input('IdDivisa', sql.Int, IdDivisa)
             .input('IdMetPago', sql.Int, IdMetPago)
             .query('exec CobroCrear @IdDivisa, @IdMetPago');
@@ -22,7 +17,7 @@ export const createPedido = async (req, res) => {
         const IdCobro = cobroResult.recordset[0].IdCobro;
 
         // Crear Pedido
-        const pedidoResult = await transaction.request()
+        const pedidoResult = await pool.request()
             .input('FechaPedido', sql.Date, new Date())
             .input('MontoTotal', sql.Decimal(18, 2), MontoTotal)
             .input('IdPersona', sql.Int, IdPersona)
@@ -32,75 +27,81 @@ export const createPedido = async (req, res) => {
 
         const IdPedido = pedidoResult.recordset[0].IdPedido;
 
-        // Crear DetallesPedido
+        // Crear Detalles de Pedido
         for (const detalle of DetallesPedido) {
-            await transaction.request()
+            await pool.request()
                 .input('Cantidad', sql.Int, detalle.Cantidad)
                 .input('MontoTotal', sql.Decimal(18, 2), detalle.MontoTotal)
                 .input('IdProducto', sql.Int, detalle.IdProducto)
                 .input('IdPedido', sql.Int, IdPedido)
                 .query('exec DetallesPedidoCrear @Cantidad, @MontoTotal, @IdProducto, @IdPedido');
 
-            // Actualizar la cantidad en el almacenamiento
-            await transaction.request()
+            // Actualizar cantidad en almacenamiento
+            await pool.request()
                 .input('IdProducto', sql.Int, detalle.IdProducto)
-                .input('IdSucursal', sql.Int, detalle.IdSucursal) // Asegúrate de que el campo IdSucursal esté disponible en detalle
+                .input('IdSucursal', sql.Int, detalle.IdSucursal)
                 .input('NuevaCantidad', sql.Int, detalle.NuevaCantidad)
                 .query('exec AlmacenamientoModificarCantPro @IdProducto, @IdSucursal, @NuevaCantidad');
         }
 
-        // Si el método de pago es tarjeta, crear el registro en la tabla Tarjeta
+        // Crear registro en tabla Tarjeta si el método de pago es tarjeta
         if (IdMetPago === 3 || IdMetPago === 4) {
-            if (IdInformacionTarjeta == null) {
-                throw new Error('Debe seleccionar una tarjeta o agregar una nueva.');
+            if (!IdInformacionTarjeta) {
+                return res.status(400).json({ message: 'Debe seleccionar una tarjeta o agregar una nueva.' });
             }
-
-            await transaction.request()
+            await pool.request()
                 .input('IdInformacionTarjeta', sql.Int, IdInformacionTarjeta)
                 .input('IdCobro', sql.Int, IdCobro)
                 .query('exec TarjetaCrear @IdInformacionTarjeta, @IdCobro');
         }
 
-        // Si el método de pago es Sinpe, crear el registro en la tabla Sinpe
+        // Crear registro en tabla Sinpe si el método de pago es Sinpe
         if (IdMetPago === 2) {
-            if (NumComprobante == null) {
-                throw new Error('Debe ingresar un número de comprobante.');
+            if (!NumComprobante) {
+                return res.status(400).json({ message: 'Debe ingresar un número de comprobante.' });
             }
-
-            await transaction.request()
+            await pool.request()
                 .input('NumComprobante', sql.VarChar, NumComprobante)
                 .input('IdCobro', sql.Int, IdCobro)
                 .query('exec SinpeCrear @NumComprobante, @IdCobro');
         }
 
-        // Si el método de pago es Transferencia, crear el registro en la tabla Transferencia
+        // Crear registro en tabla Transferencia si el método de pago es Transferencia
         if (IdMetPago === 5) {
-            if (NumComprobante == null) {
-                throw new Error('Debe ingresar un número de comprobante.');
+            if (!NumComprobante) {
+                return res.status(400).json({ message: 'Debe ingresar un número de comprobante.' });
             }
-
-            await transaction.request()
+            await pool.request()
                 .input('NumComprobante', sql.VarChar, NumComprobante)
                 .input('IdCobro', sql.Int, IdCobro)
                 .query('exec TransferenciaCrear @NumComprobante, @IdCobro');
         }
 
-        // Si el método de pago es efectivo, crear el registro en la tabla Efectivo
+        // Crear registro en tabla Efectivo si el método de pago es Efectivo
         if (IdMetPago === 1) {
-            await transaction.request()
+            await pool.request()
                 .input('IdCobro', sql.Int, IdCobro)
                 .query('exec EfectivoCrear @IdCobro');
         }
 
-        // Confirmar transacción
-        await transaction.commit();
+        // Obtener la dirección completa para crear el envío
+        const direccionResult = await pool.request()
+            .input('IdDireccionPer', sql.Int, IdDireccion)
+            .query('SELECT DireccionCompleta FROM DireccionPersona WHERE IdDireccionPer = @IdDireccionPer');
         
+        const direccionCompleta = direccionResult.recordset[0].DireccionCompleta;
 
-        res.json({ message: 'Pedido creado correctamente', IdPedido });
+        // Crear Envio
+        await pool.request()
+            .input('FechaEnvio', sql.DateTime, new Date())
+            .input('Ubicacion', sql.NVarChar, direccionCompleta)
+            .input('IdPedido', sql.Int, IdPedido)
+            .input('EstadoEnvio', sql.Int, 1)
+            .query('exec EnvioCrear @FechaEnvio, @Ubicacion, @IdPedido, @EstadoEnvio');
+
+        res.json({ message: 'Pedido y envío creados correctamente', pedido: pedidoResult.recordset });
     } catch (error) {
         console.error("Error al crear pedido:", error);
-        // Revertir transacción en caso de error
-        if (transaction) await transaction.rollback();
         res.status(500).send("Error al crear pedido");
     }
 };

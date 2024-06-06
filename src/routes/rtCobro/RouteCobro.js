@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getCobro , getCobroById } from '../../controllers/ctrCobro/ConsultaCobro.js'; 
+import { getCobro , getCobroById, getCobroUltimo } from '../../controllers/ctrCobro/ConsultaCobro.js';
 import { deleteCobro } from "../../controllers/ctrCobro/DeleteCobro.js";
-import { createCobro } from "../../controllers/ctrCobro/CreateCobro.js"; 
+import { createCobro } from "../../controllers/ctrCobro/CreateCobro.js";
 import { updateCobro } from "../../controllers/ctrCobro/ModCobro.js";
 
 // Crear una nueva instancia de Router
@@ -12,6 +12,9 @@ router.get('/cobro', getCobro);
 
 // Ruta para obtener un solo cobro por ID
 router.get('/cobro/:id', getCobroById);
+
+//router para el ultimo cobro
+router.get('/cobroUltimo', getCobroUltimo);
 
 // Ruta para crear un nuevo cobro
 router.post('/cobro', createCobro);

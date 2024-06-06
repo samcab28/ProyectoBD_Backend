@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { getCitaMedica, getCitaMedicaById, getCitaMedicaByEstado } from '../../controllers/ctrCitaMedica/ConsultaCitaMedica.js';
 import { deleteCitaMedica } from "../../controllers/ctrCitaMedica/DeleteCitaMedica.js";
 import { createCitaMedica } from "../../controllers/ctrCitaMedica/CreateCitaMedica.js"
-import { updateCitaMedica } from "../../controllers/ctrCitaMedica/ModCitaMedica.js";
+import { updateCitaMedica, updateCitaEstadoCancelado } from "../../controllers/ctrCitaMedica/ModCitaMedica.js";
 
 // Crear una nueva instancia de Router
 const router = Router();
@@ -24,6 +24,9 @@ router.put('/citaMedica/:id', updateCitaMedica);
 
 // Ruta para borrar una cita médica existente por ID
 router.delete('/citaMedica/:id', deleteCitaMedica);
+
+//cancelar la cita
+router.put('/cita/cancelar/:id', updateCitaEstadoCancelado);
 
 // Exportar el router para que pueda ser utilizado en otros archivos
 export default router;

@@ -1,22 +1,42 @@
-import {getConnection} from "../../database/connection.js";
+import { getConnection } from "../../database/connection.js";
 
-// Controlador para crear un nuevo medicamento
+// Controlador para crear un nuevo producto, medicamento y almacenamiento
 export const createMedicamento = async (req, res) => {
     try {
-        const { Cantidad, FechaCaducidad, IdUnidadMedida, IdSucursal, IdTipoMedicamento, IdProducto, AptoPublico } = req.body;
+        const {
+            NombreProducto,
+            PrecioProducto,
+            DescripcionProducto,
+            IdTipoPro,
+            IdMarcaPro,
+            IdUrl,
+            FechaCaducidad,
+            IdUnidadMedida,
+            IdTipoMedicamento,
+            AptoPublico,
+            IdSucursal,
+            Cantidad
+        } = req.body;
+
         const pool = await getConnection();
         const result = await pool.request()
-            .input('Cantidad', Cantidad)
+            .input('NombreProducto', NombreProducto)
+            .input('PrecioProducto', PrecioProducto)
+            .input('DescripcionProducto', DescripcionProducto)
+            .input('IdTipoPro', IdTipoPro)
+            .input('IdMarcaPro', IdMarcaPro)
+            .input('IdUrl', IdUrl)
             .input('FechaCaducidad', FechaCaducidad)
             .input('IdUnidadMedida', IdUnidadMedida)
-            .input('IdSucursal', IdSucursal)
             .input('IdTipoMedicamento', IdTipoMedicamento)
-            .input('IdProducto', IdProducto)
             .input('AptoPublico', AptoPublico)
-            .query('exec Medicamento Crear @Cantidad, @FechaCaducidad, @IdUnidadMedida, @IdSucursal, @IdTipoMedicamento, @IdProducto, @AptoPublico');
-        res.send(result);
+            .input('IdSucursal', IdSucursal)
+            .input('Cantidad', Cantidad)
+            .query('EXEC MedicamentoCrear @NombreProducto, @PrecioProducto, @DescripcionProducto, @IdTipoPro, @IdMarcaPro, @IdUrl, @FechaCaducidad, @IdUnidadMedida, @IdTipoMedicamento, @AptoPublico, @IdSucursal, @Cantidad');
+
+        res.send(result.recordset);
     } catch (error) {
-        console.error("Error al crear medicamento:", error);
-        res.status(500).send("Error al crear medicamento");
+        console.error("Error al crear producto, medicamento y almacenamiento:", error);
+        res.status(500).send("Error al crear producto, medicamento y almacenamiento");
     }
 }

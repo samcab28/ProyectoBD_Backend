@@ -28,3 +28,20 @@ export const getMedicamentoById = async (req, res) => {
         res.status(500).send("Error al obtener una medicamento");
     }
 }
+
+
+// Controlador para obtener los medicamentos de una sucursal
+export const getPMedicamentoBySucursal = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtener el ID de los parámetros de la URL
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('IdSucursal', id)
+            .query('exec MedicamentoPorSucursal @IdSucursal'); // Utilizar una consulta parametrizada
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener productos por sucursal:", error);
+        res.status(500).send("Error al obtener productos por sucursal");
+    }
+}

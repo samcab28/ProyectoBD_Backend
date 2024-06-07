@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getCitaMedica, getCitaMedicaById, getCitaMedicaByEstado } from '../../controllers/ctrCitaMedica/ConsultaCitaMedica.js';
+import { getCitaMedica, getCitaMedicaById, getCitaMedicaByEstado, getCitaMedicaByIdVeterinario } from '../../controllers/ctrCitaMedica/ConsultaCitaMedica.js';
 import { deleteCitaMedica } from "../../controllers/ctrCitaMedica/DeleteCitaMedica.js";
 import { createCitaMedica } from "../../controllers/ctrCitaMedica/CreateCitaMedica.js"
 import { updateCitaMedica, updateCitaEstadoCancelado } from "../../controllers/ctrCitaMedica/ModCitaMedica.js";
@@ -12,6 +12,9 @@ router.get('/citaMedica', getCitaMedica);
 
 // Ruta para obtener una sola cita médica por ID
 router.get('/citaMedica/:id', getCitaMedicaById);
+
+// Ruta para obtener citas no atendidas segun veterinario
+router.get('/citaMedicaByVeterinario/:id', getCitaMedicaByIdVeterinario);
 
 // Ruta para obtener citas médicas segun su estado y dueño de la mascota
 router.get('/citaMedica/:idPersona/:estadoCita', getCitaMedicaByEstado);

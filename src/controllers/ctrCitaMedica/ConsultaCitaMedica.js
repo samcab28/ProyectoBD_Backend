@@ -47,3 +47,19 @@ export const getCitaMedicaByEstado = async (req, res) => {
     }
 }
 
+
+// Controlador para obtener una cita segun el veterinario y que no este atendida
+export const getCitaMedicaByIdVeterinario = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtener el ID de los parámetros de la URL
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('id', id)
+            .query('EXEC CitasByVeterinario @id'); // Utilizar una consulta parametrizada
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener citas:", error);
+        res.status(500).send("Error al obtener citas");
+    }
+}

@@ -1,7 +1,7 @@
-import {getConnection} from "../../database/connection.js";
-import sql from "mssql"; 
+import { getConnection } from "../../database/connection.js";
+import sql from "mssql";
 
-// Contralador para crear citas 
+// Controlador para crear citas 
 export const createCitaMedica = async (req, res) => {
     try {
         const { FechaCita, DuracionCita, IdMascota, IdEncargado, EstadoCita } = req.body; // Obtener los datos del cuerpo de la petición
@@ -13,8 +13,10 @@ export const createCitaMedica = async (req, res) => {
             .input('IdEncargado', sql.Int, IdEncargado)
             .input('EstadoCita', sql.Int, EstadoCita)
             .query('exec CitaMedicaCrear @FechaCita, @DuracionCita, @IdMascota, @IdEncargado, @EstadoCita'); // Utilizar una consulta parametrizada
-        // Enviar una respuesta con el resultado de la consulta
-        res.json({ message: 'Cita médica creada correctamente' });
+        // Obtener la cita creada de los resultados
+        const citaCreada = result.recordset[0];
+        // Enviar una respuesta con la cita médica creada
+        res.json(citaCreada);
     } catch (error) {
         console.error("Error al crear cita médica:", error);
         res.status(500).send("Error al crear cita médica");

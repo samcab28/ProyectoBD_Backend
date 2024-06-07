@@ -64,8 +64,7 @@ import RouteCarrito from "./routes/rtCarrito/RouteCarrito.js"
 import RouteAlmacenamiento from "./routes/rtAlmacenamiento/RouteAlmacenamiento.js"
 import RouteDireccionPersona from "./routes/rtDireccionPersona/RouteDireccionPersona.js";
 import RouteInfoTarjeta from "./routes/rtInfoTarjeta/RouteInfoTarjeta.js"; 
-
-
+import RouteEmail from "./routes/rtEmail/RouteEmail.js";
 
 //declaracion de uso de los routers
 app.use(RouteDireccionPersona);
@@ -116,5 +115,6 @@ app.use(RouteHistorialLogin);
 app.use(RouteCarrito);
 app.use(RouteAlmacenamiento);
 app.use(RouteInfoTarjeta);
+app.use(RouteEmail); 
 
 export default app;

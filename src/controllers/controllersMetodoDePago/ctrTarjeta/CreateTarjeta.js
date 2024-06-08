@@ -10,7 +10,8 @@ export const createTarjeta = async (req, res) => {
             .input('IdInformacionTarjeta', sql.Int, IdInformacionTarjeta)
             .input('IdCobro', sql.Int, IdCobro)
             .query('exec TarjetaCrear @IdInformacionTarjeta, @IdCobro');
-        res.json({ message: 'Tarjeta creada correctamente' });
+        const newTarjetaId = result.recordset[0].IdTarjeta; // Captura el ID de la tarjeta recién creada
+        res.json({ message: 'Tarjeta creada correctamente', IdTarjeta: newTarjetaId });
     } catch (error) {
         console.error("Error al crear tarjeta:", error);
         res.status(500).send("Error al crear tarjeta");

@@ -11,8 +11,9 @@ export const createDireccion = async (req, res) => {
             .input('DireccionCompleta', sql.NVarChar(512), DireccionCompleta)
             .input('CodigoPostal', sql.NVarChar(64), CodigoPostal)
             .query('exec DireccionPersonaCrear @IdPersona, @DireccionCompleta, @CodigoPostal'); // Utilizar una consulta parametrizada
+        const idDireccion = result.recordset[0].IdDireccionPer;
         // Enviar una respuesta con el resultado de la consulta
-        res.json({ message: 'Dirección creada correctamente' });
+        res.json({ message: 'Dirección creada correctamente', IdDireccionPer: idDireccion });
     } catch (error) {
         console.error("Error al crear dirección:", error);
         res.status(500).send("Error al crear dirección");

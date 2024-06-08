@@ -3,7 +3,7 @@ import sql from "mssql";
 
 // Controlador para crear Cobro, Pedido, DetallePedido y Envio
 export const createPedido = async (req, res) => {
-    const { IdPersona, MontoTotal, IdMetPago, IdDivisa, IdInformacionTarjeta, NumComprobante, DetallesPedido, IdDireccion, DireccionTemporal } = req.body;
+    const { IdPersona, MontoTotal, IdMetPago, IdDivisa, IdInformacionTarjeta, NumComprobante, DetallesPedido, IdDireccion, DireccionTemporal, Envio } = req.body;
 
     try {
         const pool = await getConnection();
@@ -23,7 +23,8 @@ export const createPedido = async (req, res) => {
             .input('IdPersona', sql.Int, IdPersona)
             .input('IdCobro', sql.Int, IdCobro)
             .input('EstadoPedido', sql.Int, 1)
-            .query('exec PedidoCrear @FechaPedido, @MontoTotal, @IdPersona, @IdCobro, @EstadoPedido');
+            .input('Envio', sql.Bit, Envio) // Nuevo parámetro
+            .query('exec PedidoCrear @FechaPedido, @MontoTotal, @IdPersona, @IdCobro, @EstadoPedido, @Envio');
 
         const IdPedido = pedidoResult.recordset[0].IdPedido;
 
@@ -36,10 +37,10 @@ export const createPedido = async (req, res) => {
                 .input('IdPedido', sql.Int, IdPedido)
                 .query('exec DetallesPedidoCrear @Cantidad, @MontoTotal, @IdProducto, @IdPedido');
 
-
-            console.log("Id Prodcuto: ", detalle.IdProducto); 
+            console.log("Id Producto: ", detalle.IdProducto); 
             console.log("Id Sucursal: ", detalle.IdSucursal);
             console.log("Nueva Cantidad: ", detalle.NuevaCantidad);
+            
             // Actualizar cantidad en almacenamiento
             await pool.request()
                 .input('IdProducto', sql.Int, detalle.IdProducto)
@@ -88,26 +89,28 @@ export const createPedido = async (req, res) => {
                 .query('exec EfectivoCrear @IdCobro');
         }
 
-        // Obtener la dirección completa para crear el envío
-        let direccionCompleta;
+        if (Envio) {
+            // Obtener la dirección completa para crear el envío
+            let direccionCompleta;
 
-        if (DireccionTemporal) {
-            direccionCompleta = DireccionTemporal.DireccionCompleta;
-        } else {
-            const direccionResult = await pool.request()
-                .input('IdDireccionPer', sql.Int, IdDireccion)
-                .query('SELECT DireccionCompleta FROM DireccionPersona WHERE IdDireccionPer = @IdDireccionPer');
-            
-            direccionCompleta = direccionResult.recordset[0].DireccionCompleta;
+            if (DireccionTemporal) {
+                direccionCompleta = DireccionTemporal.DireccionCompleta;
+            } else {
+                const direccionResult = await pool.request()
+                    .input('IdDireccionPer', sql.Int, IdDireccion)
+                    .query('SELECT DireccionCompleta FROM DireccionPersona WHERE IdDireccionPer = @IdDireccionPer');
+                
+                direccionCompleta = direccionResult.recordset[0].DireccionCompleta;
+            }
+
+            // Crear Envio
+            await pool.request()
+                .input('FechaEnvio', sql.DateTime, new Date())
+                .input('Ubicacion', sql.NVarChar, direccionCompleta)
+                .input('IdPedido', sql.Int, IdPedido)
+                .input('EstadoEnvio', sql.Int, 1)
+                .query('exec EnvioCrear @FechaEnvio, @Ubicacion, @IdPedido, @EstadoEnvio');
         }
-
-        // Crear Envio
-        await pool.request()
-            .input('FechaEnvio', sql.DateTime, new Date())
-            .input('Ubicacion', sql.NVarChar, direccionCompleta)
-            .input('IdPedido', sql.Int, IdPedido)
-            .input('EstadoEnvio', sql.Int, 1)
-            .query('exec EnvioCrear @FechaEnvio, @Ubicacion, @IdPedido, @EstadoEnvio');
 
         res.json({ message: 'Pedido y envío creados correctamente', pedido: pedidoResult.recordset });
     } catch (error) {

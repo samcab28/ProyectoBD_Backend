@@ -3,7 +3,7 @@ import sql from "mssql";
 
 // Controlador para crear Cobro, Pedido, DetallePedido y Envio
 export const createPedido = async (req, res) => {
-    const { IdPersona, MontoTotal, IdMetPago, IdDivisa, IdInformacionTarjeta, NumComprobante, DetallesPedido, IdDireccion } = req.body;
+    const { IdPersona, MontoTotal, IdMetPago, IdDivisa, IdInformacionTarjeta, NumComprobante, DetallesPedido, IdDireccion, DireccionTemporal } = req.body;
 
     try {
         const pool = await getConnection();
@@ -36,6 +36,10 @@ export const createPedido = async (req, res) => {
                 .input('IdPedido', sql.Int, IdPedido)
                 .query('exec DetallesPedidoCrear @Cantidad, @MontoTotal, @IdProducto, @IdPedido');
 
+
+            console.log("Id Prodcuto: ", detalle.IdProducto); 
+            console.log("Id Sucursal: ", detalle.IdSucursal);
+            console.log("Nueva Cantidad: ", detalle.NuevaCantidad);
             // Actualizar cantidad en almacenamiento
             await pool.request()
                 .input('IdProducto', sql.Int, detalle.IdProducto)
@@ -85,11 +89,17 @@ export const createPedido = async (req, res) => {
         }
 
         // Obtener la dirección completa para crear el envío
-        const direccionResult = await pool.request()
-            .input('IdDireccionPer', sql.Int, IdDireccion)
-            .query('SELECT DireccionCompleta FROM DireccionPersona WHERE IdDireccionPer = @IdDireccionPer');
-        
-        const direccionCompleta = direccionResult.recordset[0].DireccionCompleta;
+        let direccionCompleta;
+
+        if (DireccionTemporal) {
+            direccionCompleta = DireccionTemporal.DireccionCompleta;
+        } else {
+            const direccionResult = await pool.request()
+                .input('IdDireccionPer', sql.Int, IdDireccion)
+                .query('SELECT DireccionCompleta FROM DireccionPersona WHERE IdDireccionPer = @IdDireccionPer');
+            
+            direccionCompleta = direccionResult.recordset[0].DireccionCompleta;
+        }
 
         // Crear Envio
         await pool.request()

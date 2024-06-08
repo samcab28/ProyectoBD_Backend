@@ -14,7 +14,8 @@ export const createInformacionTarjeta = async (req, res) => {
             .input('IdPersona', sql.Int, IdPersona)
             .input('Vigente', sql.Bit, 1) // Valor por defecto 1 (verdadero)
             .query('exec InformacionTarjetaCrear @NombrePropietario, @NumeroTarjeta, @CodigoSeguridad, @FechaVencimiento, @IdPersona, @Vigente');
-        res.json({ message: 'Información de tarjeta creada correctamente' });
+        const idTarjeta = result.recordset[0].IdInformacionTarjeta;
+        res.json({ message: 'Información de tarjeta creada correctamente', IdInformacionTarjeta: idTarjeta });
     } catch (error) {
         console.error("Error al crear información de tarjeta:", error);
         res.status(500).send("Error al crear información de tarjeta");

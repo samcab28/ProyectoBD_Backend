@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getHistorialLogin, getHistorialLoginById } from '../../../controllers/controllersHistorial/ctrHistorialLogin/ConsultaHistorialLogin.js';
+import { getHistorialLogin, getHistorialLoginById, getHistorialLoginByHora } from '../../../controllers/controllersHistorial/ctrHistorialLogin/ConsultaHistorialLogin.js';
 import { createHistorialLogin } from '../../../controllers/controllersHistorial/ctrHistorialLogin/CreateHistorialLogin.js';
 
 
@@ -11,6 +11,9 @@ router.get('/HistorialLogin', getHistorialLogin);
 
 // Ruta para obtener un solo HistorialLogin por ID
 router.get('/HistorialLogin/:id', getHistorialLoginById);
+
+//ruta para obtener un historial de login con fallas en los ultimos minutos
+router.get('/HistorialLoginMinuto/:hora', getHistorialLoginById);
 
 // Ruta para crear un nuevo HistorialLogin
 router.post('/HistorialLogin', createHistorialLogin);

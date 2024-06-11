@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getHistorialLogin, getHistorialLoginById } from '../../../controllers/controllersHistorial/ctrHistorialLogin/ConsultaHistorialLogin.js';
 import { createHistorialLogin } from '../../../controllers/controllersHistorial/ctrHistorialLogin/CreateHistorialLogin.js';
-import { deleteHistorialLogin } from '../../../controllers/controllersHistorial/ctrHistorialLogin/DeleteHistorialLogin.js';
+
 
 // Crear una nueva instancia de Router
 const router = Router();
@@ -15,8 +15,6 @@ router.get('/HistorialLogin/:id', getHistorialLoginById);
 // Ruta para crear un nuevo HistorialLogin
 router.post('/HistorialLogin', createHistorialLogin);
 
-// Ruta para eliminar un HistorialLogin
-router.delete('/HistorialLogin/:id', deleteHistorialLogin);
 
 // Exportar el router para que pueda ser utilizado en otros archivos
 export default router;

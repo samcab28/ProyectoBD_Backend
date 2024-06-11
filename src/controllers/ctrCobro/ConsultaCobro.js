@@ -28,3 +28,17 @@ export const getCobroById = async (req, res) => {
         res.status(500).send("Error al obtener un cobro");
     }
 }
+
+
+//ultimo cobro
+export const getCobroUltimo = async (req, res) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request().query('exec CobroUltimo');
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener cobros:", error);
+        res.status(500).send("Error al obtener cobros");
+    }
+}

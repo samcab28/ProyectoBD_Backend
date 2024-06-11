@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {getMedicamentos, getMedicamentoById} from "../../controllers/ctrMedicamento/ConsultMedicamento.js";
+import {getMedicamentos, getMedicamentoById, getPMedicamentoBySucursal} from "../../controllers/ctrMedicamento/ConsultMedicamento.js";
 import {createMedicamento} from "../../controllers/ctrMedicamento/CreateMedicamento.js";
 import {updateMedicamento} from "../../controllers/ctrMedicamento/ModMedicamento.js";
 import {deleteMedicamento} from "../../controllers/ctrMedicamento/DeleteMedicamento.js";
@@ -11,6 +11,9 @@ router.get('/medicamento', getMedicamentos);
 
 // Ruta para obtener un solo medicamento por ID
 router.get('/medicamento/:id', getMedicamentoById);
+
+//ruta para medicamentos segun sucursal
+router.get('/medicamento/sucursal/:id', getPMedicamentoBySucursal);
 
 // Ruta para crear un nuevo medicamento
 router.post('/medicamento', createMedicamento);

@@ -12,7 +12,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 
 const dbSettings = {
     user: "esteban",
-    password: "esteban",
+    password: "456",
     server: "localhost",   // Cambiar ip real al momento con samir
     database: "DB",
     options:{

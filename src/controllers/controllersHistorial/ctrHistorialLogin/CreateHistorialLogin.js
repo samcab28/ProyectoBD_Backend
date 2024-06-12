@@ -9,7 +9,7 @@ export const createHistorialLogin = async (req, res) => {
         const result = await pool.request()
             .input('username', sql.NVarChar(64), username) // Ajustar el tipo de dato según el procedimiento almacenado
             .input('passwordUser', sql.NVarChar(128), passwordUser) // Ajustar el tipo de dato según el procedimiento almacenado
-            .input('hora', sql.DateTime, hora) // Ajustar el tipo de dato según el procedimiento almacenado
+            .input('hora',  hora) // Ajustar el tipo de dato según el procedimiento almacenado
             .input('acceso', sql.Bit, acceso) // Ajustar el tipo de dato según el procedimiento almacenado
             .query('exec HistorialLoginCrear @username, @passwordUser, @hora, @acceso'); // Utilizar una consulta parametrizada
         // Enviar una respuesta con el resultado de la consulta

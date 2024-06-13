@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPedido, getPedidoById } from '../../controllers/ctrPedido/ConsultaPedido.js';
+import { getPedido, getPedidoById, getPedidoByCliente } from '../../controllers/ctrPedido/ConsultaPedido.js';
 import { deletePedido } from "../../controllers/ctrPedido/DeletePedido.js";
 import {createPedido} from "../../controllers/ctrPedido/CreatePedido.js"
 import {updatePedido} from "../../controllers/ctrPedido/ModPedido.js";
@@ -12,6 +12,9 @@ router.get('/pedido', getPedido);
 
 // Ruta para obtener un solo pedido por ID
 router.get('/pedido/:id', getPedidoById);
+
+// Ruta para obtener pedidos por ID de cliente
+router.get('/pedido/cliente/:id', getPedidoByCliente);
 
 // Ruta para crear un nuevo pedido
 router.post('/pedido', createPedido);

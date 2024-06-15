@@ -1,4 +1,5 @@
 import {getConnection} from "../../database/connection.js";
+import sql from 'mssql'; // Importa los parámetros de SQL
 
 // Controlador para obtener todas las ProductosRecetados
 export const getProductoRecetado = async (req, res) => {
@@ -28,3 +29,20 @@ export const getProductoRecetadoById = async (req, res) => {
         res.status(500).send("Error al obtener una sola ProductoRecetado");
     }
 }
+
+// Controlador para obtener productos recetados por cita
+export const getProductosRecetadosPorCita = async (req, res) => {
+    try {
+        const { idCita } = req.params;
+
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('IdCita', sql.Int, idCita)
+            .query('EXEC ProductoRecetadoPorCita @IdCita');
+
+        res.json(result.recordset);
+    } catch (error) {
+        console.error('Error fetching productos recetados:', error);
+        res.status(500).send('Error fetching productos recetados');
+    }
+};

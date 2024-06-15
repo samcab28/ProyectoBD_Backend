@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getHistorialLogin, getHistorialLoginById } from '../../../controllers/controllersHistorial/ctrHistorialLogin/ConsultaHistorialLogin.js';
+import { getHistorialLogin, getHistorialLoginById, getHistorialLoginByHora, getHistorialLoginByHoraNombre } from '../../../controllers/controllersHistorial/ctrHistorialLogin/ConsultaHistorialLogin.js';
 import { createHistorialLogin } from '../../../controllers/controllersHistorial/ctrHistorialLogin/CreateHistorialLogin.js';
-import { deleteHistorialLogin } from '../../../controllers/controllersHistorial/ctrHistorialLogin/DeleteHistorialLogin.js';
+
 
 // Crear una nueva instancia de Router
 const router = Router();
@@ -12,11 +12,15 @@ router.get('/HistorialLogin', getHistorialLogin);
 // Ruta para obtener un solo HistorialLogin por ID
 router.get('/HistorialLogin/:id', getHistorialLoginById);
 
+//ruta para obtener un historial de login con fallas en los ultimos minutos
+router.get('/HistorialLoginMinuto/:hora', getHistorialLoginByHora);
+
+//ruta para obtener un historial de login con fallas en los ultimos minutos
+router.get('/HistorialLoginMinutoAll/:hora', getHistorialLoginByHoraNombre);
+
 // Ruta para crear un nuevo HistorialLogin
 router.post('/HistorialLogin', createHistorialLogin);
 
-// Ruta para eliminar un HistorialLogin
-router.delete('/HistorialLogin/:id', deleteHistorialLogin);
 
 // Exportar el router para que pueda ser utilizado en otros archivos
 export default router;

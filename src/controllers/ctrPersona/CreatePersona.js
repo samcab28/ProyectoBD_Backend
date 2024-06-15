@@ -3,7 +3,7 @@ import {getConnection} from "../../database/connection.js";
 // En tu controlador de Express
 export const createPersona = async (req, res) => {
     try {
-        const { TipoPersona, Sexo, NombrePersona, ApellidoPersona, TelefonoPersona, CorreoPersona, UsuarioPersona, PasswordPersona } = req.body;
+        const { TipoPersona, Sexo, NombrePersona, ApellidoPersona, TelefonoPersona, CorreoPersona, UsuarioPersona, PasswordPersona, Sucursal } = req.body;
         const pool = await getConnection();
         const result = await pool.request()
             .input('ctrTipoPersona', TipoPersona)
@@ -14,7 +14,8 @@ export const createPersona = async (req, res) => {
             .input('CorreoPersona', CorreoPersona)
             .input('UsuarioPersona', UsuarioPersona)
             .input('PasswordPersona', PasswordPersona)
-            .query('exec PersonaCrear @ctrTipoPersona, @Sexo, @NombrePersona, @ApellidoPersona, @TelefonoPersona, @CorreoPersona, @UsuarioPersona, @PasswordPersona');
+            .input('Sucursal', Sucursal)
+            .query('exec PersonaCrear @ctrTipoPersona, @Sexo, @NombrePersona, @ApellidoPersona, @TelefonoPersona, @CorreoPersona, @UsuarioPersona, @PasswordPersona , @Sucursal');
         res.send(result);
     } catch (error) {
         console.error("Error al crear persona:", error);

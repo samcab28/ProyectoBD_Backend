@@ -1,4 +1,5 @@
 import {getConnection} from "../../database/connection.js";
+import sql from 'mssql'; // Importa los parámetros de SQL
 
 // Controlador para obtener todas los expedientes
 export const getExpediente = async (req, res) => {
@@ -45,3 +46,21 @@ export const getExpedienteByMascota = async (req, res) => {
         res.status(500).send("Error al obtener un solo expediente");
     }
 }
+
+// Controlador para obtener expedientes por id de mascota
+export const getExpedientePorMascota = async (req, res) => {
+    const { idMascota } = req.params;
+
+    try {
+        const pool = await getConnection();
+
+        const result = await pool.request()
+            .input('IdMascota', sql.Int, idMascota)
+            .query('EXEC ExpedientePorMascota @IdMascota');
+
+        res.json(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener el expediente de la mascota:", error);
+        res.status(500).send("Error al obtener el expediente de la mascota");
+    }
+};

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPersona, getPersonaById, getPersonaByTipo} from '../../controllers/ctrPersona/ConsultaPersona.js';
+import { getPersona, getPersonaById, getPersonaByTipo, getAdminBySucursal} from '../../controllers/ctrPersona/ConsultaPersona.js';
 import { deletePersona} from "../../controllers/ctrPersona/DeletePersona.js";
 import {createPersona} from "../../controllers/ctrPersona/CreatePersona.js"
 import {updatePersona} from "../../controllers/ctrPersona/ModPersona.js";
@@ -15,6 +15,9 @@ router.get('/persona/:id', getPersonaById);
 
 // Ruta para obtener personas por tipo
 router.get('/persona/tipo/:tipo', getPersonaByTipo);
+
+// Ruta para obtener adminsitradores de una sucursal específica
+router.get('/persona/sucursal/:sucursal', getAdminBySucursal);
 
 // Ruta para crear una nueva persona
 router.post('/persona', createPersona);

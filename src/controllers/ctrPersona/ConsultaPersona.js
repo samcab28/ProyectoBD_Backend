@@ -48,4 +48,20 @@ export const getPersonaByTipo = async (req, res) => {
     }
 }
 
+//get para admin por sucursal
+export const getAdminBySucursal = async (req, res) => {
+    try {
+        const { sucursal } = req.params; // Obtener el ID de los parámetros de la URL
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('sucursal', sucursal)
+            .query('EXEC AdminConsultarPorSucursal @sucursal'); // Utilizar una consulta parametrizada
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener la data:", error);
+        res.status(500).send("Error al obtener la data");
+    }
+}
+
 

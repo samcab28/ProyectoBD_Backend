@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getExpediente, getExpedienteById, getExpedienteByMascota, getExpedienteByDuegno } from '../../controllers/ctrExpediente/ConsultaExpediente.js';
+import { getExpediente, getExpedienteById, getExpedienteByMascota , getExpedientePorMascota} from '../../controllers/ctrExpediente/ConsultaExpediente.js';
 import { deleteExpediente} from "../../controllers/ctrExpediente/DeleteExpediente.js";
 import {createExpediente} from "../../controllers/ctrExpediente/CreateExpediente.js"
 import {updateExpediente} from "../../controllers/ctrExpediente/ModExpediente.js";
@@ -16,8 +16,8 @@ router.get('/expediente/:id', getExpedienteById);
 // Ruta para obtener expediente de una mascota
 router.get('/expedienteMascota/:id', getExpedienteByMascota);
 
-// Ruta para obtener expediente teniendo el ID del Duegno
-router.get('/expedienteDuegno/:id', getExpedienteByDuegno);
+// Ruta para obtener expediente de una mascota
+router.get('/expediente/mascota/:idMascota', getExpedientePorMascota);
 
 // Ruta para crear un nuevo expediente
 router.post('/expediente', createExpediente);

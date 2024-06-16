@@ -28,3 +28,19 @@ export const getPedidoById = async (req, res) => {
         res.status(500).send("Error al obtener un solo pedido");
     }
 }
+
+// Controlador para obtener pedidos por id cliente
+export const getPedidoByCliente = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtener el ID de los parámetros de la URL
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('IdPersona', id)
+            .query('exec PedidoConsultaPorPersona @IdPersona'); // Utilizar una consulta parametrizada
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener pedidos por cliente:", error);
+        res.status(500).send("Error al obtener pedidos por cliente");
+    }
+}

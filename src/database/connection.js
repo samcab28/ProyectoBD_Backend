@@ -10,12 +10,28 @@ import { dirname } from 'path';
 // Obtener la ruta del directorio actual
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
+// Configuración para base de datos local
+/*
+const dbSettings = {
+    user: "luis",
+    password: "2643",
+    server: "localhost",  // Nombre del servidor desde la captura de pantalla
+    database: "PROYECTOBACKUP",
+    options: {
+        encrypt: false,
+        trustServerCertificate: true,
+    }
+}
+*/
+
+// Configuración anterior comentada
+
 const dbSettings = {
     user: "Admin",
     password: "luis",
-    server: "25.7.30.30",   // Cambiar ip real al momento con samir
+    server: "25.7.30.30",  // Cambiar ip real al momento con samir
     database: "Proyecto2Bd_2024",
-    options:{
+    options: {
         encrypt: false,
         trustServerCertificate: true,
     }

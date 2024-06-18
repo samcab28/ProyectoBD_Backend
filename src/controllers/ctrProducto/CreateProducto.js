@@ -26,7 +26,7 @@ export const createProducto = async (req, res) => {
             .input('IdURL', IdURL)
             .query('exec ProductoCrear @NombreProducto, @PrecioProducto, @DescripcionProducto, @Cantidad, @IdSucursal, @IdTipoPro, @IdMarcaPro, @IdURL');
 
-        res.send(result);
+        res.send(result.recordset);
     } catch (error) {
         console.error("Error al crear producto:", error);
         res.status(500).send("Error al crear producto");

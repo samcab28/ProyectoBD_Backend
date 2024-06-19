@@ -64,4 +64,14 @@ export const getAdminBySucursal = async (req, res) => {
     }
 }
 
-
+// Función para obtener todas las personas bloqueadas
+export const getBlockedPersons = async (req, res) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request().execute('ObtenerPersonasBloqueadas');
+        res.json(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener personas bloqueadas:", error);
+        res.status(500).send("Error al obtener personas bloqueadas");
+    }
+};

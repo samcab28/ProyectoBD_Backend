@@ -7,6 +7,8 @@ export const createProducto = async (req, res) => {
             NombreProducto,
             PrecioProducto,
             DescripcionProducto,
+            Cantidad,
+            IdSucursal,
             IdTipoPro,
             IdMarcaPro,
             IdURL
@@ -17,12 +19,14 @@ export const createProducto = async (req, res) => {
             .input('NombreProducto', NombreProducto)
             .input('PrecioProducto', PrecioProducto)
             .input('DescripcionProducto', DescripcionProducto)
+            .input('Cantidad', Cantidad)
+            .input('IdSucursal', IdSucursal)
             .input('IdTipoPro', IdTipoPro)
             .input('IdMarcaPro', IdMarcaPro)
             .input('IdURL', IdURL)
-            .query('exec ProductoCrear @NombreProducto, @PrecioProducto, @DescripcionProducto, @IdTipoPro, @IdMarcaPro, @IdURL');
+            .query('exec ProductoCrear @NombreProducto, @PrecioProducto, @DescripcionProducto, @Cantidad, @IdSucursal, @IdTipoPro, @IdMarcaPro, @IdURL');
 
-        res.send(result);
+        res.send(result.recordset);
     } catch (error) {
         console.error("Error al crear producto:", error);
         res.status(500).send("Error al crear producto");

@@ -10,7 +10,7 @@ export const deleteProducto = async (req, res) => {
             .query('exec ProductoEliminar @id');
         res.send(result);
     }catch(error){
-        console.error("Error al borrado de persona:", error);
-        res.status(500).send("Error al borrado de persona");
+        console.error("Error al borrado de producto:", error);
+        res.status(500).send("Error al borrado de producto");
     }
 }

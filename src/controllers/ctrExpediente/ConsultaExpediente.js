@@ -47,6 +47,22 @@ export const getExpedienteByMascota = async (req, res) => {
     }
 }
 
+//consultar expedientes segun el duegno
+export const getExpedienteByDuegno = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtener el ID de los parámetros de la URL
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('IdExpediente', id)
+            .query('exec expedienteConsultaByDuegno @IdExpediente'); // Utilizar una consulta parametrizada
+        // Enviar una respuesta con el resultado de la consulta
+        res.send(result.recordset);
+    } catch (error) {
+        console.error("Error al obtener un solo expediente:", error);
+        res.status(500).send("Error al obtener un solo expediente");
+    }
+}
+
 // Controlador para obtener expedientes por id de mascota
 export const getExpedientePorMascota = async (req, res) => {
     const { idMascota } = req.params;
